@@ -13,8 +13,8 @@ import {
 } from 'react-native';
 
 import {
-
-  ButtonGroup
+  Icon,
+  ButtonGroup,
 } from 'react-native-elements';
 
 import * as Progress from 'react-native-progress';
@@ -125,14 +125,21 @@ export class Home extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-
+      <View style={{alignItems: 'center'}}>
         <Text style={styles.temperature}>
           {this.props.temp} °{this.props.unit}
         </Text>
-        <Text style={styles.humidity}>
-          {this.props.humidity} % Humidity
-        </Text>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.humidity}>
+            {this.props.humidity}
+          </Text>
+          <Icon
+            name='water-percent'
+            type='material-community'
+            color='red'
+            size={32}
+          />
+        </View>
 
       </View>
     );
@@ -153,19 +160,16 @@ export class Loading extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  temperature: {
+    fontSize: 64,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+
+  humidity: {
+    fontSize: 32,
   },
 });
 
