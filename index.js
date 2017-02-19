@@ -34,6 +34,7 @@ export default class Weathr extends Component {
     this.getLatestCelsiusTemperature();
     this.getLatestFahrenheitTemperature();
     this.getLatestHumidity();
+    console.log("getLatestData call complete")
 
   }
 
@@ -80,7 +81,7 @@ export default class Weathr extends Component {
       <View style={styles.container}>
 
         {(this.state.tempC && this.state.tempF && this.state.humidity) ?
-          <Home tempF={this.state.tempF} humidity={this.state.humidity} /> 
+          <Home tempF={this.state.tempF} humidity={this.state.humidity} />
           :
           <Loading /> }
 
@@ -96,7 +97,7 @@ export class Home extends Component {
       <View style={styles.container}>
 
         <Text style={styles.temperature}>
-          {this.props.tempF}
+          {this.props.tempF} °F
         </Text>
         <Text style={styles.humidity}>
           {this.props.humidity} % Humidity
