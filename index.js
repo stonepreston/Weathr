@@ -12,6 +12,11 @@ import {
   View
 } from 'react-native';
 
+import {
+
+  ButtonGroup
+} from 'react-native-elements';
+
 import * as Progress from 'react-native-progress';
 
 export default class Weathr extends Component {
@@ -22,7 +27,14 @@ export default class Weathr extends Component {
       tempF: null,
       tempC: null,
       humidity: null,
+      selectedIndex: 0
     };
+
+    this.updateIndex = this.updateIndex.bind(this);
+  }
+
+  updateIndex (selectedIndex) {
+    this.setState({selectedIndex})
   }
 
   componentWillMount() {
@@ -79,11 +91,28 @@ export default class Weathr extends Component {
       });
   }
   render() {
+
+    const buttons = ['Fahrenheit', 'Celsius']
+    var home;
+    const selectedIndex = this.state.selectedIndex;
+    if (selectedIndex == 0) {
+      home = <Home temp={this.state.tempF} humidity={this.state.humidity} unit="F"/>
+    } else {
+      home = <Home temp={this.state.tempC} humidity={this.state.humidity} unit="C"/>
+    }
+
     return (
       <View style={styles.container}>
 
+        <ButtonGroup
+          onPress={this.updateIndex}
+          selectedIndex={selectedIndex}
+          buttons={buttons}
+          containerStyle={{height: 30, marginTop: 30}}
+        />
+
         {(this.state.tempC && this.state.tempF && this.state.humidity) ?
-          <Home tempF={this.state.tempF} humidity={this.state.humidity} />
+          home
           :
           <Loading /> }
 
@@ -99,7 +128,7 @@ export class Home extends Component {
       <View style={styles.container}>
 
         <Text style={styles.temperature}>
-          {this.props.tempF} °F
+          {this.props.temp} °{this.props.unit}
         </Text>
         <Text style={styles.humidity}>
           {this.props.humidity} % Humidity
