@@ -9,6 +9,7 @@
   "dependencies": {
     "react": "~15.4.0",
     "react-native": "0.41.2",
+    "react-native-chart": "git+https://git@github.com/robcalcroft/react-native-chart.git",
     "react-native-elements": "^0.9.6",
     "react-native-progress": "^3.2.0",
     "react-native-vector-icons": "^4.0.0"

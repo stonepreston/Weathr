@@ -23,9 +23,6 @@ export default class Home extends Component {
       tempF: null,
       tempC: null,
       humidity: null,
-      fahrenheitDataPoints: null,
-      celsiusDataPoints: null,
-      humidityDataPoints: null,
       selectedIndex: 0
     };
 
@@ -38,70 +35,16 @@ export default class Home extends Component {
 
   componentWillMount() {
 
-    this.getData();
+    this.getLatestData();
 
   }
 
-  getData() {
+  getLatestData() {
 
     this.getLatestCelsiusTemperature();
     this.getLatestFahrenheitTemperature();
     this.getLatestHumidity();
-    this.getCelsiusDataPoints();
-    this.getFahrenheitDataPoints();
-    this.getHumidityDataPoints();
 
-  }
-
-  getCelsiusDataPoints() {
-
-    return fetch('https://api.thingspeak.com/channels/223104/fields/1.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-
-        var arr = responseJson.feeds.map(function (feed) {
-          return [feed.created_at, feed.field1];
-        });
-        console.log(arr);
-        this.setState({celsiusDataPoints: arr});
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  getFahrenheitDataPoints() {
-
-    return fetch('https://api.thingspeak.com/channels/223104/fields/2.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-
-        var arr = responseJson.feeds.map(function (feed) {
-          return [feed.created_at, feed.field2];
-        });
-        console.log(arr);
-        this.setState({fahrenheitDataPoints: arr});
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  getHumidityDataPoints() {
-
-    return fetch('https://api.thingspeak.com/channels/223104/fields/3.json')
-      .then((response) => response.json())
-      .then((responseJson) => {
-
-        var arr = responseJson.feeds.map(function (feed) {
-          return [feed.created_at, feed.field3];
-        });
-        console.log(arr);
-        this.setState({humidityDataPoints: arr});
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   }
 
   getLatestCelsiusTemperature() {
@@ -154,9 +97,7 @@ export default class Home extends Component {
       tempHumDisplay = <TempHumDisplay temp={this.state.tempC} humidity={this.state.humidity} unit="C"/>
     }
 
-    var ready = this.state.tempC && this.state.tempF && this.state.humidity
-    && this.state.celsiusDataPoints && this.state.fahrenheitDataPoints && this.state.humidityDataPoints;
-    if (ready) {
+    if (this.state.tempC && this.state.tempF && this.state.humidity) {
 
       return (
         <View style={styles.container}>
