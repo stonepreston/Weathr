@@ -105,7 +105,7 @@ export default class Home extends Component {
             onPress={this.updateIndex}
             selectedIndex={selectedIndex}
             buttons={buttons}
-            containerStyle={{height: 30, marginTop: 20}}
+            containerStyle={{height: 30, marginTop: 30}}
           />
          {tempHumDisplay}
         </View>
