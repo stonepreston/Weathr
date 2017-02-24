@@ -23,8 +23,15 @@ export default class TempHumDisplay extends Component {
         </Text>
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.humidity}>
-            {this.props.humidity} %
+            {this.props.humidity}
           </Text>
+
+          <Icon
+            name='water-percent'
+            type='material-community'
+            color={styleConstants.blueColor}
+            size={32}
+          />
 
         </View>
 
