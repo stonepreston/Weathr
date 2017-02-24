@@ -11,6 +11,8 @@ import {
   ButtonGroup,
 } from 'react-native-elements';
 
+import {styleConstants} from './styles.js';
+
 export default class TempHumDisplay extends Component {
 
   render() {
@@ -21,14 +23,9 @@ export default class TempHumDisplay extends Component {
         </Text>
         <View style={{flexDirection: 'row'}}>
           <Text style={styles.humidity}>
-            {this.props.humidity}
+            {this.props.humidity} %
           </Text>
-          <Icon
-            name='water-percent'
-            type='material-community'
-            color='blue'
-            size={32}
-          />
+
         </View>
 
       </View>
@@ -40,9 +37,11 @@ export default class TempHumDisplay extends Component {
 const styles = StyleSheet.create({
   temperature: {
     fontSize: 64,
+    color: styleConstants.greyColor,
   },
 
   humidity: {
     fontSize: 32,
+    color: styleConstants.greyColor,
   },
 });

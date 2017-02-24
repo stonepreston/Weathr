@@ -7,12 +7,13 @@ import {
 } from 'react-native';
 
 import * as Progress from 'react-native-progress';
+import {styleConstants} from './styles.js';
 
 export default class Loading extends Component {
   render() {
     return (
       <View>
-        <Progress.CircleSnail color={['red', 'green', 'blue']} />
+        <Progress.CircleSnail color={styleConstants.blueColor} />
       </View>
     );
   }

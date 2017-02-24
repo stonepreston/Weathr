@@ -11,7 +11,7 @@ import {
   ButtonGroup,
 } from 'react-native-elements';
 
-
+import {styleConstants} from './styles.js';
 import Loading from './Loading.js';
 import TempHumDisplay from './TempHumDisplay.js';
 
@@ -41,10 +41,16 @@ export default class Home extends Component {
 
   getLatestData() {
 
+    // reset values of state variables
     this.getLatestCelsiusTemperature();
     this.getLatestFahrenheitTemperature();
     this.getLatestHumidity();
 
+  }
+
+  refresh() {
+    this.setState({tempC: null, tempF: null, humidity: null});
+    this.getLatestData();
   }
 
   getLatestCelsiusTemperature() {
@@ -104,10 +110,30 @@ export default class Home extends Component {
           <ButtonGroup
             onPress={this.updateIndex}
             selectedIndex={selectedIndex}
+            selectedBackgroundColor={styleConstants.blueColor}
+            selectedTextStyle={{color: "white"}}
             buttons={buttons}
-            containerStyle={{height: 30, marginTop: 30}}
+            containerStyle={{height: 30}}
           />
-         {tempHumDisplay}
+
+          <View style={styles.tempHumDisplay}>
+
+            <View style={{flex: 1}}>
+            {tempHumDisplay}
+            </View>
+
+            <View style={{flex: 1}}>
+              <Icon
+                name='refresh'
+                type='material-community'
+                color={styleConstants.blueColor}
+                reverse={true}
+                raised={true}
+                size={28}
+                onPress={this.refresh.bind(this)}
+              />
+            </View>
+          </View>
         </View>
       )
 
@@ -129,6 +155,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingTop: 30,
   },
 
   loading: {
@@ -144,4 +171,11 @@ const styles = StyleSheet.create({
   humidity: {
     fontSize: 32,
   },
+
+  tempHumDisplay: {
+
+    flex: 1,
+    alignItems:'center',
+    justifyContent: 'center',
+  }
 });

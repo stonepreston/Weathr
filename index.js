@@ -21,9 +21,7 @@ export default class Weathr extends Component {
   render() {
 
     return (
-
       <Home />
-
     );
   }
 }
